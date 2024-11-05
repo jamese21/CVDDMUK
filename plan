@@ -1,2 +1,11 @@
 https://github.com/martinjc/UK-GeoJSON
 https://spatial-dev.guru/2024/04/28/automated-polygon-splitting-using-voronoi-diagrams-and-clustering/
+https://www.aimspress.com/article/doi/10.3934/aci.2023008?viewType=HTML
+https://pypi.org/project/balanced-kmeans/
+
+
+K means is not working because the numbers of points in each cluster are too uneven
+Trying balanced k means clustering
+Trying generating points denser in the center of mass
+
+Variance with 100 density and divided by 5000 = 6.62573211004893e-05
