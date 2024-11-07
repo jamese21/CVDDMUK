@@ -1,4 +1,4 @@
-from shapely.geometry import Polygon, MultiPolygon
+from shapely.geometry import Polygon, MultiPolygon, Point
 import geopandas as gpd
 import matplotlib.pyplot as plt
 
@@ -126,7 +126,7 @@ def generate_points_no_outline(min_x, max_x, min_y, max_y, polygon):
     return points
 
 # plot a geometry and a set of points over it
-def plot_points_and_map(points, geometry):
+def plot_points_and_map(points, geometry, point_size):
     # Ensure the input is a list for consistency
     if isinstance(geometry, (Polygon, MultiPolygon)):
         geometry = [geometry]  # Wrap single geometries in a list
@@ -137,7 +137,7 @@ def plot_points_and_map(points, geometry):
     # Plotting
     fig, ax = plt.subplots()
     gdf_polygons.plot(ax=ax, alpha=0.5, edgecolor='black')
-    gdf_points.plot(ax=ax, color='red', marker='.', markersize=10, label='Points')
+    gdf_points.plot(ax=ax, color='red', marker='.', markersize=point_size, label='Points')
 
     # Set axis properties
     ax.set_title('Polygons and Points')
