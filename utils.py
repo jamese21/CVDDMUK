@@ -1,6 +1,10 @@
 from shapely.geometry import Polygon, MultiPolygon, Point
 import geopandas as gpd
 import matplotlib.pyplot as plt
+import numpy as np
+import plotly.graph_objects as go
+import random
+import folium
 
 # method for plotting a polygon or multipolygon
 def plot_map(geometry):
@@ -125,6 +129,44 @@ def generate_points_no_outline(min_x, max_x, min_y, max_y, polygon):
                     points.append(point)
     return points
 
+# Functions for generating points across polygon with different distribution
+def place_n_points(polygon, n, iterations=5):
+    # values
+    if polygon == None:
+        return []
+    area = polygon.area
+    r = (area / (n * np.pi)) ** 0.5
+
+    # n random points poisson disc distribution (ish)
+    min_x, min_y, max_x, max_y = polygon.bounds
+    points = []
+    while len(points) < n:
+        x = random.uniform(min_x, max_x)
+        y = random.uniform(min_y, max_y)
+        candidate = Point(x, y)
+
+        # Append candidate if within the polygon and distance from other points >= r
+        if polygon.contains(candidate):
+            if all(candidate.distance(point) >= r for point in points):
+                points.append(candidate)
+    return points
+
+def distribute_points(polygon, points, iterations):
+    if polygon == None:
+        return []
+    area = polygon.area
+    r = (area / (len(points) * np.pi)) ** 0.5
+    for _ in range(iterations):
+        centroids = []
+        for point in points:
+            neighborhood = [p for p in points if p.distance(point) < 2*r]
+            if neighborhood:
+                centroid_x = sum(p.x for p in neighborhood) / len(neighborhood)
+                centroid_y = sum(p.y for p in neighborhood) / len(neighborhood)
+                centroids.append(Point(centroid_x, centroid_y))
+        points = centroids
+    return points
+
 # plot a geometry and a set of points over it
 def plot_points_and_map(points, geometry, point_size):
     # Ensure the input is a list for consistency
@@ -145,3 +187,26 @@ def plot_points_and_map(points, geometry, point_size):
     ax.set_ylabel('Latitude')
     plt.axis('equal')  # Equal scaling
     plt.show()
+
+def plot_points_and_map_interactive(points, geometry):
+    # Initialize a map centered around the first point (or a central location)
+    if points:
+        center = [points[0].y, points[0].x]
+    else:
+        center = [geometry[0].centroid.y, geometry[0].centroid.x]
+    m = folium.Map(location=center, zoom_start=12)
+
+    # Add geometries (polygons)
+    for geom in geometry:
+        folium.GeoJson(data=mapping(geom), style_function=lambda x: {
+            'fillColor': 'blue',
+            'color': 'black',
+            'weight': 1,
+            'fillOpacity': 0.5
+        }).add_to(m)
+
+    # Add points
+    for point in points:
+        folium.CircleMarker(location=[point.y, point.x], radius=3, color='red').add_to(m)
+
+    return m
