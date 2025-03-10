@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import plotly.graph_objects as go
 import random
-import folium
+# import folium
 
 # method for plotting a polygon or multipolygon
 def plot_map(geometry):
@@ -210,3 +210,14 @@ def plot_points_and_map_interactive(points, geometry):
         folium.CircleMarker(location=[point.y, point.x], radius=3, color='red').add_to(m)
 
     return m
+
+# Convert a list of polygons/multipolygons to a single multipolygon
+def list_to_multipolygon(geom_list):
+    all_polygons = []
+    for geom in geom_list:
+        if isinstance(geom, Polygon):
+            all_polygons.append(geom)
+        elif isinstance(geom, MultiPolygon):
+            all_polygons.extend(geom.geoms)
+    merged = MultiPolygon(all_polygons)
+    return merged
