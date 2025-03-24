@@ -1,10 +1,9 @@
 \documentclass{article}
 
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
 \usepackage{url}
 
 \begin{document}
-This is a \TeX file.
-
 
 \section{Introduction}
 The term "democracy" is derived from the Ancient Greek term "dēmokratía", which combines "dēmos" (people), and "kratos" (rule), 
@@ -28,20 +27,45 @@ parties also have the agency to influence policy, and decision making is not ent
 This means every single seat in the House of Commons is crucial, and the distribution of these seats among parties is just as important to democratic decision making in the UK
 as who the actual winning party is.
 
-A notable example was 1979
+A notable of the power that the non-governing parties can hold was in 1979, when the Labour government headed by James Callaghan lost a parliamentary vote of confidence
+by a narrow margin of 311-310 votes, forcing him to call an early general election \cite{callaghan}. His party subsequently lost to the Conservative Party, led by Margaret Thatcher, who then went on to
+serve as Prime Minister for the next eleven years. This event underscores the power of the House of Commons and highlights how important it is that MPs are elected in a manner
+that is as representative of the general population as possible.
 
-There have been 650 seats in the House of Commons, and therefore electoral constituencies, since 2010, and this number has generally hovered around the mid 600s ever
+There have been 650 seats in the House of Commons, each with a corresponding electoral constituency, since 2010, and this number has generally hovered around the mid 600s ever
 since it was founded with 658 seats in 1801 \cite{numofseats}. This figure came from the 558 seats that already existed in the Parliament 
-of Great Britain, and the additional 100 seats that were allocated to Ireland when the two merged to form the modern day House of Commons. While the size of 
-the electorate of each constituency is kept roughly equal  (with some exceptions) by the Boundary Commissions, the actual number of constituencies, along
+of Great Britain, and the additional 100 seats that were allocated to Ireland when the two merged to form the modern day House of Commons. 
+While the size of the electorate of each constituency is kept roughly equal  (with some exceptions) by the Boundary Commissions, the actual number of constituencies, along
 with the criteria considered for boundary allocations, have undergone no significant change since the chamber's inception over 200 years ago \cite{parlcons}.
-Given that the UK is a substantially different place now than it was in 1801, with a population that has increased by over fifty million, it seems reasonable to question
-if the current system of constituency allocation is still fit for purpose.
+Given that the UK today is vastly different from the country of 1801, with a population that has increased by over fifty million, one could reasonably question
+whether the current system of constituency allocation is still fit for purpose.
 
-Poorly drawn constituencies can have a profound impact on the fairness of political representation. For instance, when a constituency experiences an
-overwhelming majority for one party, many votes may 
+Poorly drawn constituencies can have a profound impact on the fairness of political representation. Constituencies that don't reflect the actual distribution of voters can lead to 
+significant disparities in how much weight each vote carries. A Labour voter in a constituency overwhelmingly dominated by Conservative voters, for example, essentially has a meaningless
+vote, whereas voters in tightly contested, or marginal constituencies, can have a disproportionately large influence on the outcome of the election. One notable example <INSERT>
+This phenomenon, known as "gerrymandering", can result in outcomes that do not reflect the true will of the electorate.
+
+The aim of this dissertation, therefore, is to explore the potential of computational methods in optimising the allocation of constituencies in the UK. 
+By developing algorithms to generate constituency boundaries based on defined criteria and conducting voting simulations to evaluate their effectiveness, 
+this study seeks to identify configurations that produce a more balanced and representative electoral map. The findings could offer valuable insights into the strengths 
+and weaknesses of the current system, potentially informing future boundary reviews or even contributing to discussions on reforming the process of constituency allocation 
+to better uphold democratic principles.
 
 \section{Objectives}
+Given the context outlined in the introduction, the objectives of this dissertation are listed below.
+\subsection{Primary Objectives}
+\begin{itemize}
+    \item Acquire and process relevant data on the UK's electoral constituencies, historical election results, and demographic information.
+    \item Develop software that generates constituency boundaries with similar electorate sizes but with a variable number of constituencies.
+    \item Develop software that simulates first-past-the-post (FPTP) voting on the generated constituency sets using historical election data.
+    \item Analyse the results of simulations over a wide range of configurations and interpret what insights can be drawn from them.
+\end{itemize}
+\subsection{Secondary Objectives}
+\begin{itemize}
+    \item Develop software that generates constituency boundaries with equal land areas rather than electorate sizes, with a variable number of constituencies.
+    \item Run FPTP simulations on the new constituency sets.
+    \item Compare the two approaches and assess if there is any merit to dividing constituencies by land area rather than population.
+\end{itemize}
 
 \section{Literature Review}
 
