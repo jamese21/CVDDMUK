@@ -2,13 +2,83 @@
 
 \usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
 \usepackage{url}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage[english]{babel}
+\usepackage[autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+\graphicspath{ {./figures/} }
 
 \begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+            
+        \Huge
+        \textbf{A Computational View of Democratic Decision Making in the United Kingdom}
+        
+        
+        \vspace{1.5cm}
+        \Large
+        \textbf{James Eyre}
+
+        210006835
+            
+        \vspace{0.8cm}
+            
+        \includegraphics[width=0.6\textwidth]{usta_logo.png}
+        
+        \vspace{0.8cm}
+        \Large
+        Supervised by Dr. Ognjen Arandelovic\\
+        \vspace{0.8cm}
+        \large
+        Department of Computer Science\\
+        University of St Andrews\\
+        4th of April 2025
+            
+    \end{center}
+\end{titlepage}
+
+\section*{Abstract}
+
+
+\newpage
+
+\section*{Declaration}
+I declare that the material submitted for assessment is my
+own work except where credit is explicitly given to others by
+citation or acknowledgement. This work was performed
+during the current academic year except where otherwise
+stated.
+The main text of this project report is [insert word count] %TODO
+words long, including project specification and plan.
+In submitting this project report to the University of St
+Andrews, I give permission for it to be made available for use
+in accordance with the regulations of the University Library.
+I also give permission for the title and abstract to be
+published and for copies of the report to be made and
+supplied at cost to any bona fide library or research worker,
+and to be made available on the World Wide Web. I retain
+the copyright in this work.
+
+\newpage
+
+\section*{Acknowledgements}
+%TODO
+
+\newpage
+
+\tableofcontents
+
+\newpage
 
 \section{Introduction}
 The term "democracy" is derived from the Ancient Greek term "dēmokratía", which combines "dēmos" (people), and "kratos" (rule), 
 literally translating to "rule by the people" \cite{democracy}. This concept, first realised in Athens during the fifth century B.C.E, has since become the
-foundation upon which countless political systems and governments have been constructed, aiming to ensure fairness in the distribution of power \cite{natgeo}.
+foundation upon which countless political systems and governments have been constructed, aiming to ensure fairness and equality in the distribution of power \cite{natgeo}.
 
 The United Kingdom operates within this framework, employing parliamentary democracy as its system of government \cite{parldem}. In this system, the government of
 the UK is answerable to Parliament, which is composed of two bodies: The House of Lords, and the House of Commons. The House of Lords, as the secondary chamber,
@@ -20,36 +90,46 @@ The House of Commons is the primary legislative body of the UK. It is responsibl
 and government, and ensuring that the interests of the general population of the UK are represented. It is composed of Members of Parliament (MPs), each of
 whom is democratically elected to represent their electoral constituency, and must re-attain their seat in the general elections held at least every five
 years \cite{generalelections}. As the more directly democratic chamber that more closely represents the current political climate of the country, the House of Commons plays a crucial
-role in shaping policy and maintaining government accountability. The power that a political party holds can be thought of as roughly proportional to the
-number of seats it holds in the House of Commons. The party with the most seats is invited to form the government, but, as a majority vote is required in the
-House of Commons to pass legislation, not only is it important for the government to maintain the support of a majority of MPs, but the less prominent political
-parties also have the agency to influence policy, and decision making is not entirely dominated by the governing and other major parties \cite{divisions}.
-This means every single seat in the House of Commons is crucial, and the distribution of these seats among parties is just as important to democratic decision making in the UK
-as who the actual winning party is.
+role in shaping policy and maintaining government accountability to the general population. 
 
-A notable of the power that the non-governing parties can hold was in 1979, when the Labour government headed by James Callaghan lost a parliamentary vote of confidence
-by a narrow margin of 311-310 votes, forcing him to call an early general election \cite{callaghan}. His party subsequently lost to the Conservative Party, led by Margaret Thatcher, who then went on to
+The power that a political party holds is entirely dependent on how many seats it holds in the House of Commons. The party with the most seats is invited to form the government, 
+but, as a majority vote is required in the House of Commons to pass legislation, it is vital that the party in power maintains the support of a majority of of MPs. This means that,
+unless one party holds an outright majority of seats, decision-making is not necessarily dominated by the governing party, and non-governing parties can have a real impact on 
+legislation.
+
+A notable display of the power that the non-governing parties can hold was in 1979, when the Labour government headed by James Callaghan lost a parliamentary vote of confidence
+by a narrow margin of 311--310 votes, forcing him to call an early general election \cite{callaghan}. His party subsequently lost to the Conservative Party, led by Margaret Thatcher, who then went on to
 serve as Prime Minister for the next eleven years. This event underscores the power of the House of Commons and highlights how important it is that MPs are elected in a manner
 that is as representative of the general population as possible.
 
-There have been 650 seats in the House of Commons, each with a corresponding electoral constituency, since 2010, and this number has generally hovered around the mid 600s ever
-since it was founded with 658 seats in 1801 \cite{numofseats}. This figure came from the 558 seats that already existed in the Parliament 
-of Great Britain, and the additional 100 seats that were allocated to Ireland when the two merged to form the modern day House of Commons. 
+Since 2010, there have been 650 seats in the House of Commons, each with a corresponding electoral constituency. This number has generally hovered around the mid 600s ever since it was founded
+with 658 seats in 1801 \cite{numofseats}. This figure came from the 558 seats that already existed in the Parliament 
+of Great Britain, and the additional 100 seats that were allocated to Northern Ireland when the two merged to form the modern day House of Commons. 
 While the size of the electorate of each constituency is kept roughly equal  (with some exceptions) by the Boundary Commissions, the actual number of constituencies, along
 with the criteria considered for boundary allocations, have undergone no significant change since the chamber's inception over 200 years ago \cite{parlcons}.
 Given that the UK today is vastly different from the country of 1801, with a population that has increased by over fifty million, one could reasonably question
 whether the current system of constituency allocation is still fit for purpose.
 
-Poorly drawn constituencies can have a profound impact on the fairness of political representation. Constituencies that don't reflect the actual distribution of voters can lead to 
+The way in which constituencies are drawn can have a profound impact on the fairness of political representation. Constituencies that fail to reflect the actual distribution of voters can lead to 
 significant disparities in how much weight each vote carries. A Labour voter in a constituency overwhelmingly dominated by Conservative voters, for example, essentially has a meaningless
-vote, whereas voters in tightly contested, or marginal constituencies, can have a disproportionately large influence on the outcome of the election. One notable example <INSERT>
-This phenomenon, known as "gerrymandering", can result in outcomes that do not reflect the true will of the electorate.
+vote, whereas voters in tightly contested, or marginal constituencies, can have a disproportionately large influence on the outcome of an election. 
 
-The aim of this dissertation, therefore, is to explore the potential of computational methods in optimising the allocation of constituencies in the UK. 
-By developing algorithms to generate constituency boundaries based on defined criteria and conducting voting simulations to evaluate their effectiveness, 
-this study seeks to identify configurations that produce a more balanced and representative electoral map. The findings could offer valuable insights into the strengths 
-and weaknesses of the current system, potentially informing future boundary reviews or even contributing to discussions on reforming the process of constituency allocation 
-to better uphold democratic principles.
+One famous example of this occurred in the 2000 United States Presidential election with the state of Florida. 
+At the time, George W. Bush, the Republican candidate, trailed Al Gore, the Democratic candidate, by 246 to 267 electoral votes, with just Florida's 25 electoral votes remaining to be
+recounted due to the razor-thin margin. Ultimately, Bush won the state (and consequently the entire election) by just 537 votes out of approximately 5.8 million\textemdash a difference of 0.009\%. 
+Because Florida's electoral votes decided the election, voters in the state had an outsized impact, as every single vote cast there can be said to have directly and disproportionately influenced the result.
+
+This is an example of "gerrymandering", a phenomenon that occurs when electoral boundaries are drawn in a way that advantages a particular party. It can result in outcomes that misrepresent 
+the electorate, undermining democratic principles and the fairness of elections. While empirically understanding what makes a set of constituencies "optimal" is arguably impossible,
+if constituencies could be drawn in a way such that electoral outcomes remain stable in the presence of small perturbations 
+and minor constituency changes, the inherent bias that the drawing of constituencies creates in the process of democratic decision-making can theoretically be minimised.
+
+Therefore, the aim of this dissertation is to leverage computational methods to gain insight into how the drawing of constituency boundaries can be improved in the UK.
+Programs will be developed to generate constituency sets based on defined criteria, and to conduct voting simulations using historical voting data. Both partitioning by 
+equal constituency area and equal constituency population will be tested, and constituency sets will be generated with a wide range of constituency counts. The data from these
+simulations will be analysed with the goal of gaining understanding of what factors affect the stability and robustness of a set of constituencies, and whether there is any merit to
+allocating constituencies by equal area rather than by population. The findings could offer valuable insights into the strengths and weaknesses of the current system, potentially informing
+future boundary reviews or even contributing to discussions on reforming the process of constituency allocation to better uphold democratic principles.
 
 \section{Objectives}
 Given the context outlined in the introduction, the objectives of this dissertation are listed below.
@@ -58,7 +138,7 @@ Given the context outlined in the introduction, the objectives of this dissertat
     \item Acquire and process relevant data on the UK's electoral constituencies, historical election results, and demographic information.
     \item Develop software that generates constituency boundaries with similar electorate sizes but with a variable number of constituencies.
     \item Develop software that simulates first-past-the-post (FPTP) voting on the generated constituency sets using historical election data.
-    \item Analyse the results of simulations over a wide range of configurations and interpret what insights can be drawn from them.
+    \item Analyse the results of simulations over a wide range of configurations and interpret what factors affect the stability of electoral outcomes.
 \end{itemize}
 \subsection{Secondary Objectives}
 \begin{itemize}
@@ -67,17 +147,825 @@ Given the context outlined in the introduction, the objectives of this dissertat
     \item Compare the two approaches and assess if there is any merit to dividing constituencies by land area rather than population.
 \end{itemize}
 
-\section{Literature Review}
+\section{Context Survey}
 
-\section{Data Methodology}
+\subsection{Evaluating the Fairness of Constituency Boundaries}
+The problem of drawing constituencies fairly, also known as districting, has existed almost as long as democracy itself, having been
+introduced with the reforms of Cleisthenes in Athens in 508 BCE \cite{cleisthenes}. It is commonly agreed among political scientists and economists that districting is a 
+critical determinant of how political parties are represented, and consequently this problem has been the subject of extensive research over the years.
+While it is desirable for constituencies to be drawn in a way that is fair and representative, the criteria for what constitutes a "fair" set of constituencies
+is far from straightforward. Unlike a pure democracy, where fairness and equal representation are intrinsic by design, a constituency-based representative
+democracy, such as that of the UK, introduces an inherent source of bias that can distort electoral outcomes. Therefore, it is helpful to somehow quantify this
+bias to help establish what exactly an "optimal" districting looks like.
 
-\section{Partitioning}
+\subsubsection{The Seat-Vote Curve and Partisan Bias}
+
+The Seat-Vote Curve is a common tool used to visualise the fairness of a set of constituencies. It is a plot of the number of legislative seats a party 
+is expected to win versus the percentage of votes it receives. This curve is heavily influenced by the distribution of voters across constituencies, and
+can be used to identify the presence of gerrymandering or other forms of bias in the districting process. As an example, Figure \ref{fig:svcurve} shows the Seat-Vote Curve for
+Pennsylvania during the 2016 US elections, where the Republican Party is represented by the red line and the Democratic party by the blue. The curve shows that,
+at all vote percentages between roughly 30 and 65, the Republicans are expected to win significantly more seats than the Democrats, indicating some unfairness
+in the layout of Pennsylvania's electoral districts.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{SVCurvePenn.png}
+    \caption{Seat-vote curve for Pennsylvania in 2016 \cite{svcurve}}
+    \label{fig:svcurve}
+\end{figure}
+
+This unfairness can be quantified using a measure called partisan bias (or Gelman-King Bias), introduced by Andrew Gelman and Gary King in their landmark paper
+\textit{Estimating Incumbency Advantage without Bias} in 1990. Partisan bias is essentially defined as the difference between a party's seat share and vote share at a given point. It
+can either be measured for an upcoming election using expected values based on computer simulations, or used to quantify the bias in an actual election result. 
+It is not only a theoretical construct but also has observable, concrete manifestations in electoral outcomes. If the Conservative party is expected to win 70\% of the seats in the UK with an
+overall vote share of 50\%, the partisan bias with respect to them would be 20\%. This would mean that despite half of all voters not favouring the Conservatives, they would have effectively
+managed to attain 70\% of the legislative power in the country. While situations this extreme are uncommon, partisan bias is a very real phenomenon that can be caused by seemingly innocuous shifts
+in electoral boundaries, and has impacts on electoral results that cannot be understated. This metric will be key in understanding which parties are favoured or disadvantaged, and attaining a 
+disproportionate number of seats compared to their vote share in each simulated election.
+
+\subsubsection{The Gallagher Index}
+
+Another metric for assessing electoral fairness is the Gallagher index, defined by Michael Gallagher in \textit{Proportionality, Disproportionality and Electoral Systems} in 1991 \cite{gallagher}.
+While partisan bias provies insight into how an electoral system benefits or disadvantages a specific party, the Gallagher Index offers a broader measure of overall disproportionality in an 
+election. It quantifies the extent to which the allocation of seats deviates from a proportional outcome, where each party's seat share matches its vote share.
+
+Mathematically, this is calculate according to equation \ref{eq:gallagher}, where $LSq$ is the Gallagher index, and $V_i$ and $S_i$ are the vote and seat share for party $i$.
+
+\begin{equation}
+    LSq = \sqrt{\frac{1}{2} \sum_{i=1}^{n} (V_i - S_i)^2}
+    \label{eq:gallagher}
+\end{equation}
+
+Values range from 0 to 100, with 0 indicating a perfectly proportional election and higher values signifying disproportionality. A low Gallagher index suggests that votes are being
+translated into seats in a way that more closely reflects voter preferences, whereas higher index values indicate a disparity. The Gallagher indices of the 2012 US House of Representatives 
+election and the 2012 Queensland state election in Australia can be compared to contextualise what a "good" and "bad" score look like. These are shown in tables \ref{tab:queensland2012} and \ref{tab:gallagherindex}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+        Party & Votes (\%) & Seats (\%) \\
+        \hline
+        Liberal National Party & 49.65 & 87.64 \\
+        Australian Labor Party & 26.66 & 7.87 \\
+        Katter's Australian Party & 11.53 & 2.25 \\
+        Greens & 7.53 & 0 \\
+        Independent & 2.98 & 2.25 \\
+        Other & 1.65 & 0 \\
+        \hline
+        \textbf{Gallagher Index} & & \textbf{31.17} \\
+        \hline
+    \end{tabular}
+    \caption{Election Results and Gallagher Index for Queensland State Election 2012 \cite{queensland2012}}
+    \label{tab:queensland2012}
+\end{table}
+
+As table \ref{tab:queensland2012} shows, the Liberal National Party (LNP) managed to win 78 out of 89 sets in the election, or 87.64\%, with a vote share of just 49.65\%. This reflects a partisan bias 
+with respect to the LNP of 37.99\% and results in the election as a whole having a Gallagher index of 31.17. This is an example of what these metrics look like for a relatively misrepresentative election.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+        Party & Votes (\%) & Seats (\%) \\
+        \hline
+        Republican Party & 47.66 & 53.80 \\
+        Democratic Party & 48.77 & 44.20 \\
+        Other & 3.56 & 0.00 \\
+        \hline
+        \textbf{Gallagher Index} & & \textbf{5.58} \\
+        \hline
+    \end{tabular}
+    \caption{Election Results and Gallagher Index for US House of Representatives Election 2012}
+    \label{tab:gallagherindex}
+\end{table}
+
+On the other hand, the 2012 US House of Representatives election had less partisan bias, with the difference between seat and vote share for each party not exceeding 6\%. The Gallagher index
+is 5.58, which indicates a tolerable level of misrepresentation that may be inherent to a representative democracy.
+
+\subsubsection{The Laakso-Taagepera Index}
+
+The Laako-Taagepera Index, created by Laakso and Taagepera in 1979, is a metric that measures the "effective number of parties" in an election \cite{ltindex}. While many political parties exist in the UK that
+vie for seats in each general election, historically the Conservative and Labour parties have been overwhelmingly dominant. The consequence of this is that while the actual number of parties seems
+high, the number of effective parties in the UK that have real political impact is realistically much lower. The Laakso-Taagepera index is a formal quantification of this, calculated according to
+equation \ref{eq:ltindex}, where $N$ is the Laakso-Taagepera index, $n$ is the number of parties and $p_i$ is either the share of seats or votes which party $i$ won in the election.
+
+\begin{equation}
+    N = \frac{1}{\sum_{i=1}^{n}p_i^2}
+    \label{eq:ltindex}
+\end{equation}
+
+A higher index suggests more viable political parties, and thus more competitive elections, while a lower index implies a concentrated political landscape with a small number of large parties.
+Since $p_i$ can represent either seat or vote share, the number of effective parties can be different based on which is selected. While neither a higher or lower number of effective parties is
+strictly better, and the purpose of this investigation is not to evaluate this aspect of electoral systems, the difference between seat and vote share-based Laakso-Taagepera indices for the 
+same election can shed insight on how an electoral system and districting favours or disadvantages political parties based on size. If the seat-based Laakso-Taagepera index is significantly 
+lower than the vote-based index, it suggests that parliamentary representation is concentrated among fewer parties than the overall vote distribution would indicate. This implies that larger 
+parties are disproportionately benefiting from the electoral system. Conversely, if the seat-based index is higher than the vote-based index, it indicates that smaller parties are securing more 
+seats than their vote share alone would justify, suggesting an electoral system that favors smaller parties.
+
+The 2024 UK general elections had a seat-based index of 2.24 and a vote-based index of 4.76 \cite{electionindices}, which means that there were 2.24 viable political parties based on seat shares, but 4.76
+viable parties based on votes. This clearly highlights a disparity between votes-to-seats conversion for larger and smaller parties, and indicates that the current UK electoral system and 
+constituency boundaries are set up such that large parties are significantly favoured.
+
+This metric can be used to help understand what configurations may be conducive to avoid biasing a set of constituencies towards favouring larger or smaller political parties, and fairly distributing power.
+
+% The two metrics presented so far capture the fairness of a constituency set in terms of how parties perform overall in the elections in relation to their 
+% vote share. However, adequate representation of the opinion of each voter is just as important as fairness between parties. .....
+
+% An voter can be considered unrepresented if their vote does not
+% contribute to the election of a candidate. This can happen in one of two ways: either the voter's preferred candidate loses, or the voter's preferred candidate wins by a large enough margin
+% such that their vote did not affect the outcome. Calculating the total number of these "wasted" votes that occur in elections run on each constituency set may be a 
+
+
+
+% partisan bias shows which parties are favoured
+% efficiency gap shows the number of wasted votes overall.
+
+
+% -> ASK OGGIE ABOUT TESTING
+
+% A seminal paper on the subject of optimal districting is "Socially Optimal Districting: A Theoretical and Empirical Exploration" by Stephen Coate and Brian Knight.
+% The paper uses the decennial redrawing of district lines in the United States as a case study to 
+
+% Talk about:
+% - gerrymandering/partisan bias: "A Theory of Political Districting" by Gary King (1983)
+% - Fariness in representation
+
+% Seats votes curve
+% Partisan Bias (gelman-king)
+% Responsiveness - probably no
+% Efficiency gap - no
+% gallagher index
+% laakso taagapera index
+
+\subsection{Computational Approaches to Districting}
+
+The drawing of electoral boundaries is critical for fair representation in voting. Thus, many academics have attempted to apply computational methods to improving the process.
+
+\subsubsection{Optimal Districting with Computational Methods}
+
+In 2008, Puppe and Tasnadi showed that the problem of determining an unbiased districting is computationally intractable \cite{unbiaseddistricts}. Given a two party election between parties
+$A$ and $B$, the constituency boundary set $f$ and voter's choices $v$ together decide the number of constitutions won by parties $A$ and $B$, which is denoted by \(F(f, v, A)\) or 
+\(F(f, v, B)\) respectively. The problem of finding an unbiased districting is then defined as finding a set of $d$ constituencies $f$, given $v$ (which is deterministic for the purpose of this proof), such that 
+\(F(f, v, A) = \lfloor d\frac{n_A}{n} \rfloor\), or \(F(f, v, B) = \lfloor d\frac{n_B}{n} \rfloor\) where \(n_A\) and \(n_B\) are the number of voters that favour each party. This definition of bias is equivalent to partisan bias. Without constraints on voter location or the number of constituencies, this problem 
+is trivial to solve by filling \(\lfloor d\frac{n_A}{n} \rfloor\) constituencies with voters of party $A$, and \(\lfloor d\frac{n_B}{n} \rfloor\) constituencies with voters of party $B$. However, when adding the simple constraint of requiring districts to be contiguous given fixed voter positions, not only is it proven that a solution does not necessarily exist, 
+but even checking that it does is an NP-Complete problem. Considering that the task of drawing constituencies in this dissertation comes with more constraints on top of district connectedness, such as a having a fixed number of constituencies and
+maintaining equal electorate sizes or area between constituences, creating an all-powerful algorithm that can find the "optimal" constituency set that minimises bias is infeasible for this investigation.
+
+\subsubsection{Eliminating Human Bias from Districting with Computational Methods}
+
+An alternative approach that has been taken is to use computational methods to remove biased human influence from the districting process, rather than to attempt finding the optimal solution in terms of bias and representation.
+In \textit{Gerrymandering and computational redistricting}, the authors note the threat that partisan gerrymandering causes in the US, where in many states, the party in power controls the 
+redistricting process that happens every 10 years \cite{gerrymander}. A statistic that shows the impact of this is that "in the 17 states where Republicans controlled the redistricting process, 
+they secured 72\% of the available seats on only 52\% of the vote. Mirroring, in the six states where Democrats controlled the districting process, they secured 71\% of the seats on 56\% of 
+the vote" \cite{gerrymandering}. As a solution, it is proposed that the districting process is automated with computational models instead. The method introduced in the paper is based on 
+$k$-means clustering. Census blocks, which record the population of an area of land, are used for clustering to help form clusters of relatively equal population, and
+centroids are initialised using $k$-means++. In each iteration, points are assigned to the nearest cluster, and at the end of each iteration, cluster centroids are updated to reflect member positions.
+Where the algorithm differs from normal $k$-means is that clusters with more members are penalised\textemdash distances to these clusters are multiplied by a scaling factor related to
+the cluster's cardinality (ie. population). The scaling factor $s_{i,t}$ for cluster $i$ at iteration $t$ is 
+
+\begin{equation}
+    s_{i,t} = \beta s_{i,t-1} + (1-\beta)w_i
+    \label{eq:scalefactor}
+\end{equation}
+
+Where $\beta$ is a parameter with range (0,1) that controls the weighting between the previous scaling factor and cluster weight $w_i$.
+Cluster weight is calculated by
+
+\begin{equation}
+    w_i = \frac{|C_i|^\alpha}{\sum_{j=1}^{K} |C_j|^\alpha}
+    \label{eq:clusterweight}
+\end{equation}
+
+where \(|C_i|\) is the cardinality of the $i$th cluster, $\alpha$ is a parameter determining how much to penalise clusters for disproportionately high cardinality, and $K$ is the number of clusters.
+
+The authors elect to tune $\alpha$ and $\beta$ to minimise the average pairwise distance of voters within districts (or points within clusters) in order to maximise district compactness.
+Optimisation based on any kind of electoral metrics is foregone, as the aim is simply to generate geographically viable constituency sets rather than to algorithmically determine an
+optimal solution. This approach is better suited for the aims of this dissertation, and elements of it and the clustering algorithm explained above may be of value.
+
+\subsection{Polygon Partitioning}
+
+The problem of segmenting a country into a set of constituencies can be generalised as the problem of partioning a polygon (with many sides) into sub-polygons of
+equal area or population (assuming a population density map is available). 
+
+\subsubsection{A Geometric Approach}
+
+One algorithm to accomplish this while minimising the length of cuts made to make partitions, detailed by Sumit Khetarpal, is as follows \cite{khetarpal}.
+
+Assume the polygon being split has area $A_{poly}$, and is being partitioned in to $N$ sub-polygons. It follows that the area of each sub-polygon must be \(\frac{A_{poly}}{N}\).
+Drawing a straight line that splits off a sub-polygon of that area leaves a main polygon with remaining area of \(\frac{N-1}{N}A_{poly}\). This approach can be continued until
+the remaining area is equal to the desired sub-polygon area, and the partitioning is complete. This reduces the problem of splitting a polygon $N$-ways to cutting a polygon into 
+two sub-polygons with specific areas. As cuts are assumed to be straight lines in this algorithm, they must start from one edge and end on another.
+
+Taking a four-sided polygon as the base case for this problem, this gives six possible edge pairs, two of which are shown for an example polygon in figure \ref{fig:examplecuts}.
+The problem is now further reduced to making a cut on a given edge pair such that the cut splits the main polygon into two sub-polygons of specific area.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{c1.drawio.png}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{c2.drawio.png}
+    \end{subfigure}
+    \caption{Example of constituency boundary cuts}
+    \label{fig:examplecuts}
+\end{figure}
+
+Say the edges $\overline{AD}$ and $\overline{BC}$ are selected in this example. The angular bisector of these edges is shown as the dotted line $m$, and the
+projected points of the four vertices $A$, $B$, $C$, and $D$ onto the opposing edge, at an angle perpendicular to $m$, are determined. These are ignored if
+they do not lie on the opposite line segment, and thus only the projections of $B$ and $C$, denoted $G$ and $H$ respectively, are taken. Connecting points with
+their projections divides the four-sided main polygon into the trapezoid $GDBH$ and the triangles $AGB$ and $DCH$. This is shown in figure \ref{fig:bisector}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{bisector.drawio.png}
+    \caption{Angular bisector and projections}
+    \label{fig:bisector}
+\end{figure}
+
+The cut line between edges $\overline{AD}$ and $\overline{BC}$, if it exists (as it does not necessarily exist for all edge pairs), must lie in either of
+the triangles or the trapezoid. Letting $A_{AGB}$ and $A_{DCH}$ be the areas of the left and right triangles and $A_{GDHB}$ be the area of the trapezoid,
+the cut line is in:
+
+\begin{itemize}
+    \item Triangle $AGB$ if \(\frac{A_{poly}}{N} < A_{AGB}\).
+    \item Trapezoid $GDHB$ if \(\frac{A_{poly}}{N} > A_{AGB}\) and \(\frac{A_{poly}}{N} < A_{AGB} + A_{GDHB}\).
+    \item Triangle $DCH$ if \(\frac{A_{poly}}{N} < A_{AGB} + A_{GDHB}\).
+\end{itemize}
+
+If the cut line lies in one of the triangles, one end of the cut line must lie on the vertex of the triangle that has a valid projection onto the opposing edge,
+so for triangle $AGB$, this would be point $B$, as shown in figure \ref{fig:cutlocations}a. This is because this is the only point on $BC$ that is part of the triangle.
+The other end of the cut line can be found through linear interpolation between points $A$ and $G$ based on the target area. The same applies if the cut line lies
+in the other triangle. If the cut line lies in the trapezoid, neither end is fixed, and both ends to be found through linear interpolation between points $G$ and $D$, and $B$ and $H$. This is illustrated in figure \ref{fig:cutlocations}b.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{trianglecut.drawio.png}
+        \caption{Cut line in triangle}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{trapcut.drawio.png}
+        \caption{Cut line in trapezoid}
+    \end{subfigure}
+    \caption{Possible cut line locations}
+    \label{fig:cutlocations}
+\end{figure}
+
+These steps, which work for the base case of a four-sided polygon, can be extended to the general case of an $N$-sided polygon. For a given edge, all other edges
+are checked to see where a split line can exist (ie. that form a structure similar to the base case where points can be projected across the angular bisector onto
+the opposing edge without intersecting other existing edges). In the example in figure \ref{fig:nsides}, $\overline{AB}$ and $\overline{CD}$ is a pair of edges that meet this criterion,
+while $\overline{AB}$ and $\overline{DI'}$ do not. By iteratively making cuts according to this algorithm, the final result will be a polygon separated into $N$ sub-polygons of equal size.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{nsides.png}
+    \caption{Angular bisector and projections \cite{khetarpal}}
+    \label{fig:nsides}
+\end{figure}
+
+This algorithm scales with the number of edges, and has quartic time complexity for concave polygons, which both the mainland of the UK and Northern Ireland are.
+The computational demand is high but feasible, particularly considering it is acceptable in the context of this investiagtion to simplify the polygons representing the territories of the UK 
+to reduce the number of edges. The real problem with this algorithm is that it presents no way to guarantee that the partitions it generates are geographically viable.
+It would be entirely possible for this algorithm to generate a set of partitions that contains constituencies of highly irregular shapes, and a key philosophy behind a representative democracy is that
+constituencies should group geographically connected people together, so that they can vote based on issues local to their district. As this method in no way guarantees that constituencies have
+relatively compact shapes, it is likely unviable for this project.
+
+\subsubsection{A Clustering-Based Approach}
+
+An alternative approach to partitioning a polygon $N$-ways that ensures compactness is based on K-means clustering, similar to the method presented in \textit{Gerrymandering and computational redistricting},
+and is a widely used method in contexts such as urban planning and resource allocation \cite{voronoi}. First, a sufficient number of random points are generated within the polygon to ensure even coverage.
+$N$ centroids are then initialised using K-means++, and K-means clustering is used to form clusters. Next, the centroid of each cluster is computed, and a Voronoi diagram is generated from these
+new centroids. The final partitioning is obtained by intersecting this Voronoi diagram with the original polygon.\\
+
+This method offers several advantages:
+\begin{enumerate}
+    \item Due to its use of clustering and Voronoi diagrams, it naturally produces compact and geographically viable constituencies.
+    \item Its time complexity is independent of the number of edges or the irregularity of the polygon, meaning the UK's complex borders are not an issue.
+    \item It can easily be adapted to account for population density by generating points according to population distribution instead of randomly.
+\end{enumerate}
+
+However, there are also notable drawbacks:
+\begin{enumerate}
+    \item The algorithm does not guarantee equal-sized constituencies. In fact, due to the UK's irregular geography, there will likely be a somewhat significant disparity between smaller and larger constituencies.
+    \item Random point generation can be computationally expensive, as points must first be generated within the bounding box and then checked to ensure they fall inside the polygon.
+\end{enumerate}
+
+Despite the limitations, the compactness guarantee and the possibility of incorporating population density make this kind of approach well-suited for the context. The variance in constituency size may not
+be a critical issue, provided it remains within reasonable bounds, as the goal is to gain insight rather than to generate realistic, optimally balanced constituencies. Since a large number of
+constituency sets will be generated for analysis, minor inconsistencies in size should have minimal impact on overall conclusions. Additionally, the computational cost of generating random points
+is a one-time expense, as all constituency sets can be derived from the same initial set of points, though separate point distributions would be required for area and population-based partitioning.
+
+\section{Software Engineering Process}
+
+\subsection{Approach}
+
+The objectives of this dissertation include designing and building software to generate sets of constituency boundaries and run simulations on those boundaries using historical data.
+The development process began with heavy experimentation and prototyping, probing different available datasets, libraries, and algorithms for partitioning. Due to the geometrical nature
+of the task, working in a notebook rather than a regular file that allowed visualisation of the current state of the partitions was crucial at this stage. Additionally, supervisor feedback
+proved invaluable in these early stages when it was often unclear what the best way to implement the necessary functionality was.
+
+The software engineering process could be described as iterative, happening in cycles of development and supervisor feedback, until the programs being developed reached a polished enough state
+to begin fine-tuning and experimentation. Existing, structured work methodologies such as Agile would not have been suitable for this case, because the process closer resembled an exploration 
+rather than the straightforward development of an app.
+
+\subsection{Tools and Resources}
+The tools and resources are key to any software development process. This section lists and explains each one that was used in this dissertation.
+
+\subsubsection{Python}
+Python is a high-level programming language with a wealth of third-party libraries that can help with any task imaginable. Due to its ease of use and wide support, it has become one of the 
+industry standard languages for working with data. It was selected over other high-level languages such as Java for these reasons, as well as its compatibility with Jupyter Notebooks <REF>.
+
+\subsubsection{Jupyter Notebook}
+Jupyter Notebook is a tool that allows code to be written and run within separate blocks in the same notebook-style file. This has a variety of uses, such as plotting a a geometry in between
+lines of code that modify it to ensure the program is behaving as expected. This is useful for experimentation and prototyping.
+
+\subsubsection{Pandas}
+Pandas is a data analysis library for Python that introduces the DataFrame object, which allows fast and easy data manipulation and analysis \cite{pandas}. It also provides other useful tools such as in-built
+methods for reading and writing CSV and JSON files. This project is built on top of various datasets, and Pandas has been essential for effectively interacting with them.
+
+\subsubsection{Shapely}
+Shapely is a popular third-party Python package that provides a wide range of features relating to computational geometry \cite{shapely}. It supports anything from basic polygon transforms to more complex
+operations such as the calculation of convex hulls and Voronoi diagrams. Many of the provided features have been invaluable to this dissertation, and have eliminated the need for any
+geometric functions to be developed from scratch.
+
+\subsubsection{GeoPandas}
+GeoPandas is a library built on top of Pandas and Shapely that provides various geospatial functions \cite{kelsey_jordahl_2020_3946761}. It was primarily used in this case to work with geographical datasets formatted
+as .geojson files, which GeoPandas supports.
+
+\subsubsection{Matplotlib}
+Matplotlib is a comprehensive Python library for creating visualisations in Python \cite{matplotlib}. This library was used for its functionality for graphing geometric objects for sanity checking during 
+development and for the generation of helpful diagrams and visualisations used to present results.
+
+\subsubsection{Scikit-learn}
+Scikit-learn is a machine learning and data analysis library for Python \cite{scikit-learn}. While there is no machine learning element to this project, the clustering implementations provided by Scikit-learn
+were used for partitioning.
+
+\section{Ethics}
+No ethical considerations were identified for this dissertation.
+
+\section{Generating Partitions}
+
+\subsection{Preprocessing}
+
+The geographical datasets being used in this dissertation are the Westminster Parliamentary Constituencies provided by the Office for National Statistics (ONS). The boundaries have been modified
+over the years, so the datasets that correspond to the year of the election being simulated are used for partitioning (ie. the 2017 constituency map and statistics would be used to create partitions
+and simulate elections with 2017 voting data). These datasets contain geometric information on the boundaries of each constituency, stored as Polygon objects. The 2024 dataset is visualised in 
+figure \ref{fig:oldcons}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{oldcons.png}
+    \caption{Existing parliamentary constituencies from the ONS dataset}
+    \label{fig:oldcons}
+\end{figure}
+
+The UK has a vast number of islands around its shores. Of these islands, 82 have an area of five square kilometres, and these 82 islands make up roughly 1\% of the 
+residential addresses in the UK \cite{bbcislands}. While most islands have too few people to warrant their own constituency, five constituencies exist that are entirely island-based \cite{votes2024}. 
+These are:
+
+\begin{itemize}
+    \item Na h-Eileanan an Iar, with an electorate of approximately 21,000, making it the smallest in the UK.
+    \item Orkney and Shetland, with an electorate of about 33,000.
+    \item Isle of Wight East and West, which together make up the Isle of Wight and have a combined electorate of around 110,000.
+    \item Ynys Môn, with an electorate of approximately 52,000.
+\end{itemize}
+
+The mean constituency electorate size in the UK is roughly 74,000, meaning these constituencies are all significantly smaller compared to the rest. Furthermore,
+ignoring the UK's islands would mean losing only five out of 650 constituencies worth of voting data, and would vastly simplify the partitioning process. Therefore,
+islands are removed from consideration for this dissertion, leaving only the territories of the UK mainland and Northern Ireland for partioning. The methodology 
+followed for removing islands is explicitly removing the island constituencies listed above from the dataset, and trimming each remaining constituency with multiple territories
+ (which implies that they have a mainland territory along with one or two islands included) down to just their biggest territory. The exception to this rule is the constituency
+of North Ayrshire and Arran, which covers the Isle of Arran and part of the mainland in south-west Scotland. In this case, the island is actually bigger than the mainland portion
+of the constituency, so the second largest territory is kept instead. Finally, taking the union of the remaining geometries to join existing constituencies and selecting the two largest polygons, representing
+the UK mainland and Northern Ireland, leaves two contiguous polygons ready for partitioning. This can be seen in figure \ref{fig:preprocessedpolygons}.
+
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{mainland.png}
+        \caption{Resulting polygon of the mainland}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ni.png}
+        \caption{Resulting polygon of Northern Ireland}
+    \end{subfigure}
+    \caption{Preprocessed polygons ready for partitioning}
+    \label{fig:preprocessedpolygons}
+\end{figure}
+
+<TODO> MOVE THIS PARAGRAPH
+While Northern Ireland and the UK mainland are treated as separate territories for partitioning, they remain part of the same electoral system and must be allocated constituencies accordingly. 
+This requires ensuring that the total number of constituencies across both territories matches the desired total while maintaining proportionality based on either land area or population. 
+To achieve this, the split between Northern Ireland and the mainland is determined by their respective shares of the total land area or population. Additionally, to ensure fair representation, 
+Northern Ireland is always allocated at least one constituency, even when the total number of constituencies is so low that Northern Ireland having a single constituency might be disproportional.
+
+\subsection{Partitioning}
+
+For the reasons discussed in the context survey, partitioning is done using a clustering-based method. Therefore, to partition based on area, a point map that evenly covers each polygon must
+first be generated. While random points can be used like in the example mentioned previously, a more efficient and reliable way to accomplish this is
+to evenly generate points across the bounding box of each polygon, and keeping only those that are contained with the polygon. This ensures an even distribution of points and that each polygon
+is covered entirely. 
+
+These points can be generated using a grid system, where the ratio of how densely points should be distributed across the x and y axes, denoted $x_r$ and $y_r$ respectively, 
+can be calculated according to equation \ref{eq:pointdensityratio}, where $h$ and $w$ are the height and width of the polygon being partitioned.
+
+\begin{equation}
+    x_r = \frac{w}{w+h}, y_r = \frac{h}{w+h}
+    \label{eq:pointdensityratio}
+\end{equation}
+
+The number of points to be placed on each row and column of the grid, $x_n$ and $y_n$, can then be calculated as:
+
+\begin{equation}
+    x_n = \rho x_r, y_n = \rho y_r
+\end{equation}
+
+where $\rho$ is a parameter controlling the density of points, and can be varied according to how dense the point coverage needs to be to support partitioning at a fine grained level
+(values of 200 and 130 for the mainland and Northern Ireland respectively were found to be sufficient for this project). The horizontal and vertical gaps between points are then simply the ratio between
+height and $x_n$ and $y_n$ respectively, and points can iteratively be generated and checked by starting at the top left of the bounding box, and creating points in a grid according to the horizontal
+and vertical gaps. Each point is inspected to check whether it is contained in the polygon upon creation, and is discarded if not. The result is an even covering of points across the polygon, which is 
+shown for the mainland and Northern Ireland in figure \ref{fig:areapoints}.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{mainland_area_points.png}
+        \caption{Point distribution across the mainland}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ni_area_points.png}
+        \caption{Point distribution across Northern Ireland}
+    \end{subfigure}
+    \caption{Evenly generated point distributions}
+    \label{fig:areapoints}
+\end{figure}
+
+To partition based on population, points need to be distributed according to population density. This is accomplished by instead treating each existing electoral constituency as 
+a separate polygon across which to generate points, and using the same algorithm but with a density, $\rho$, proportional to constituency population. The results of this are
+shown in figure \ref{fig:poppoints}.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{mainlandpoppoints.png}
+        \caption{Point distribution across the mainland}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{nipoppoints.png}
+        \caption{Point distribution across Northern Ireland}
+    \end{subfigure}
+    \caption{Points distributed according to population density}
+    \label{fig:poppoints}
+\end{figure}
+
+After generating the points, centroids are initialized using the K-means++ algorithm, followed by standard K-means clustering to form distinct clusters.
+The convex hulls of these clusters are then computed, and their centroids are determined. For this illustration of the partitioning process, the number of constituencies
+is set to 100. This can be seen in figure \ref{fig:convexhulls}.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{mainland_area_convex.png}
+        \caption{Convex hulls and centroids for the mainland}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ni_area_convex.png}
+        \caption{Convex hulls and centroids for Northern Ireland}
+    \end{subfigure}
+    \caption{Convex hulls and centroids for area-based partitioning}
+    \label{fig:convexhulls}
+\end{figure}
+
+
+The Voronoi diagram of these centroids is then computed, which forms the set of internal constituency boundaries. This is shown in figure \ref{fig:voronoi}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{mainland_area_voronoi.png}
+        \caption{Voronoi diagram for the mainland}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ni_area_voronoi.png}
+        \caption{Voronoi diagram for Northern Ireland}
+    \end{subfigure}
+    \caption{Voronoi diagram of convex hull centroids for area-based partitioning}
+    \label{fig:voronoi}
+\end{figure}
+
+The intersection of this diagram and the main polygon forms the final set of constituencies. This is shown in figure \ref{fig:finalcons}.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{mainland_area_finalcons.png}
+        \caption{Final mainland constituencies}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ni_area_finalcons.png}
+        \caption{Final Northern Ireland constituencies}
+    \end{subfigure}
+    \caption{Final set of 100 constituencies for the mainland and Northern Ireland}
+    \label{fig:finalcons}
+\end{figure}
+
+One concern that was noted in the context review for clustering-based partitioning methods was that districts are not guaranteed to be equal in size. This is also
+true in the case of this example, as shown in figure \ref{fig:area_histogram}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{area_histogram.png}
+    \caption{Histogram of generated constituency areas for area-based partitioning in this example}
+    \label{fig:area_histogram}
+\end{figure}
+
+While the generated constituencies exhibit some variance in area, their distribution is such that the majority are similar in size, with relatively few outliers.
+The constituency sets generated in this dissertation are intended as tools for analysis rather than potential replacements for the existing system, with a large
+number of them being produced using different configurations. Therefore, the impact of this variance is minimized by the large dataset and the focus on general trends
+rather than the characteristics of individual sets.
+
+% While the resulting constituency sets for population-based partitioning were found to be viable, the variance in constituency size for the districts generated through area-based partitioning was found
+% to be larger than acceptable. This is shown in figure X. Closer analysis revealed that the abnormally small constituencies tended to be located on irregular coastal features such as small peninsulas
+% and bays, which distort the implicit relationship between the number of points in a cluster and its resulting area in the Voronoi diagram. This issue was solved by setting up a buffer zone around the 
+% edge of the polygon to be partitioned. By preventing points from being placed anywhere within a certain distance from the coast, coastal clusters naturally grow slightly larger because they are
+% pushed to include points that lie further inland. This method, while not perfect, was found to even out the areas of generated constituencies to within an acceptable tolerance.
 
 \section{Simulation}
 
+The simulation of elections with historical election result data is the second part of the data collection process. Given a set of generated constituencies and a dataset of election results,
+the aim is to simulate an election and output the results. While there is plenty of prior research on topics adjacent to this, such as simulating elections on existing constituencies using different 
+electoral systems \cite{totalrepresentation}, or developing probability-based methods to predict election results given non-deterministic voter behaviour \cite{mitra2023evaluatingdistrictbasedelectionsurveys},
+no literature was found on this exact topic, making it a novel challenge.
+
+The first algorithm that was proposed works as follows. $N$ random points would be generated within the boundaries of each existing constituency for each political party, where $N$ is proportional
+to the number of votes that party received in the actual election. For example, if the Conservatives received 100 votes in the Bedford constituency while the Labour party received 500, then the random
+point map for labour votes across bedford would have five times more points than the conservative party. Then, for each political party, the newly generated constituencies would be superimposed onto
+these point maps, and the number of points that fall within each constituency would be the number of votes that party received in that constituency in the simulated election. Repeating this process
+for each political party would yield constituency-level voting numbers for each party, and from this the results of the simulated election could be calculated.
+
+There are two significant issues with this approach:
+
+\begin{enumerate}
+    \item The computational cost of randomly generating points across 650 polygons for 13 different parties is high.
+    \item Random point generation can cause misrepresentative results in the simulated election, and offsetting this would require a high density of points, which compounds the problem of high computational cost.
+\end{enumerate}
+
+The point generation is clearly the bottleneck, causing computational cost issues and limiting the potential of this approach. Circumventing this step entirely would fix all the major problems with 
+the approach and yield a working algorithm for simulation.
+
+The intuition behind the random generation of points is that it reflects the distribution of voters across the UK for each political party. Once this countrywide distribution is known, it is simple
+to determine how many of those votes fall within each generated constituency, and from there the results can be calculated. If, instead of approaching this problem from a countrywide perspective,
+each individual generated constituency is handled one at a time, the generation of points can be skipped. 
+
+Let $C = \{c_1, c_2, ..., c_{650}\}$ be the set of original constituencies, $P = \{p_1, p_2, ..., p_{13}\}$ be the set of political parties, and $D = \{d_1, d_2, ..., d_n\}$ be the set of generated
+constituencies. Let $f(p_a, c_b)$ be the number of votes $p_a$ received in $c_b$ in the actual election. Then, $g(p_a, d_b)$, the number of votes that $p_a$ receives in $d_b$ in
+the simulated election, can be calculated according to equation \ref{eq:g}, where $intersection(x,y)$ is the size of the intersection between territories $x$ and $y$, and $area(x)$ is the area of territory $x$.
+
+\begin{equation}
+    g(p_a, d_b) = \sum_{i=1}^{650} \frac{intersection(d_b, c_i)}{area(c_i)}f(p_a, c_i)
+    \label{eq:g}
+\end{equation}
+
+By taking the weighted number of votes according to the size of the intersection between the generated and actual constituencies, and summing this for all constituencies
+where there is an overlap, the number of votes for each party in each generated constituency can be estimated without needing to generate any points.
+The votes per party are then assembled into a dataframe for easy manipulation, and the election results along with any desired metrics can be calculated.
+
+\section{Experimental Setup}
+
+This dissertation explores whether varying the number of constituencies and the partitioning method (by area or population) can improve the quality of constituency boundaries. 
+To enable meaningful analysis, a range of configurations must be defined that allow flexibility in exploration while remaining within realistic bounds.
+
+It is important to consider that each constituency directly corresponds to a seat in the House of Commons, so an impractical number of constituencies could disrupt parliamentary operations.
+Too few seats may concentrate legislative power in the hands of too few representatives, potentially allowing personal agendas to outweigh party politics. Conversely, too many constituencies
+could make debates, in-person voting, and general parliamentary logistics unmanageable.
+
+To balance feasibility and insight, this study will explore constituency numbers ranging from 50 to 1000 in increments of 5, for area-based and population-based partitioning methods.
+This range was determined with supervisor guidance to ensure sufficient breadth of exploration while maintaining practical relevance.
+
+For each simulation, alongside basic information such as the overall winner and seats won per party, several key metrics will be calculated, including:
+
+\begin{itemize}
+    \item The partisan bias for each party 
+    \item The Gallagher Index
+    \item The Laakso-Taagepera Index for both seat and vote share
+\end{itemize}
+
+Simulations will be run using data from the 2017, 2019 and 2024 general elections. These elections were run across different sets of constituencies in different political landscapes, so
+will provide a relatively balanced perspective and prevent any skewing of data that might occur if only one election was used in analysis.
+
+The datasets being used for simulation are the official results for the general elections in 2017, 2019 and 2024, provided by UK Parliament, 
+published in the House of Commons Library \cite{votes2017}\cite{votes2019}\cite{votes2024}. Additionally, constituency population data from the same source 
+is used to aid with population-based partitioning \cite{popdata}.
+
 \section{Results}
 
-\section{Analysis}
+\subsection{2024 Simulation}
+
+\subsubsection{Actual Results}
+The results of the actual 2024 general election are shown in table \ref{tab:uk2024}, for all major parties. The Gallagher index as calculated from these figures (so excluding insignificant minor parties)
+is 23.64. The Laakso-Taagepera index is 4.76 based on vote share, and 2.23 based on seat share. These figures will be used as a point of comparison for subsequent analysis.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|c|c|c}
+        \hline
+        \textbf{Party} & \textbf{Seat Share (\%)} & \textbf{Vote Share (\%)} & \textbf{Partisan Bias (\%)} \\
+        \hline
+        Labour & 63.3 & 33.7 & +29.6 \\
+        Conservative & 18.6 & 23.7 & -5.1 \\
+        Liberal Democrat & 11.1 & 12.2 & -1.1 \\
+        Scottish National Party & 1.4 & 2.5 & -1.1 \\
+        Sinn Féin & 1.1 & 0.7 & +0.4 \\
+        Independent & 0.9 & 2.0 & -1.1 \\
+        Reform UK & 0.8 & 14.3 & -13.5 \\
+        Democratic Unionist Party & 0.8 & 0.6 & +0.2 \\
+        Green & 0.6 & 6.7 & -6.1 \\
+        Plaid Cymru & 0.6 & 0.7 & -0.1 \\
+        Social Democratic \& Labour Party & 0.3 & 0.3 & 0.0 \\
+        Alliance Party & 0.2 & 0.4 & -0.2 \\
+        Ulster Unionist Party & 0.2 & 0.3 & -0.1 \\
+        \hline
+    \end{tabular}
+    \caption{2024 UK General Election Results}
+    \label{tab:uk2024}
+\end{table}
+
+\subsubsection{Population-based Partitioning}
+
+
+\subsubsection{Area-based Partitioning}
+
+Figure \ref{fig:overall_winner_2024} shows the winning party for each number of constituencies. As the number of constituencies increases past roughly 600, 
+the Conservative party starts to win every election, despite having roughly 10\% less votes than the Labour party.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{overall_winner_2024.png}
+    \caption{Overall winner for each number of constituencies using area-based partitioning for 2024}
+    \label{fig:overall_winner_2024}
+\end{figure}
+
+This pattern would indicate that the distribution of conservative voters across the UK is such that they are favoured when the UK is broken down into more 
+fine-grained segments of equal size. A likely explanation for this is that Conservative voters may outnumber Labour voters in rural regions where population
+density is lower. While such regions of Conservative voters are more likely to be encompassed within a constituency containing a town or city with denser population when
+the number of constituencies is lower, for higher numbers of constituencies the distribution of voters across rural areas becomes more important. This can be verified
+with a comparison between the results map of the UK mainland for 850 constituencies and a population density map of the UK in figures \ref{fig:mainland_area_850_results_map} and \ref{fig:population_density_map}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{mainland_area_850_results_map_2024.png}
+    \caption{Mainland results map for area-based partitioning with 850 constituencies (2024)}
+    \label{fig:mainland_area_850_results_map}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{population_density_map.png}
+    \caption{Population density map of the UK \cite{popdensity}}
+    \label{fig:population_density_map}
+\end{figure}
+
+The majority of constituencies being won by the Conservatives in this instance are located in areas of low population density, such as the Scottish highlands, the southernmost part of Scotland,
+the Yorkshire countryside just south of Newcastle and part of the South West Peninsula. In contrast, the Labour party is mostly winning constituencies in more populated regions such as the area 
+surrounding Edinburgh and Glasgow, Newcastle and the area encompassing Liverpool, Manchester, Leeds and Birmingham in central England.
+
+This would imply that, as would intuitively be the case, one weakness of area-based partitioning is that the votes of those living in less densely populated areas can carry a disproportionately
+large amount of weight.
+
+Table \ref{tab:seat_share_partisan_bias_area_2024} shows the average seat share and partisan bias for each party across all simulations.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|c|c}
+        \hline
+        \textbf{Party} & \textbf{Mean Seat Share (\%)} & \textbf{Mean Partisan Bias (\%)} \\
+        \hline
+        Labour & 40.0 & +6.6 \\
+        Conservative & 31.0 & +5.6 \\
+        Liberal Democrat & 13.3 & +0.2 \\
+        Scottish National Party & 6.6 & +3.8 \\
+        Plaid Cymru & 2.4 & +1.6 \\
+        Sinn Féin & 3.5 & +2.6 \\
+        Democratic Unionist Party & 1.8 & +1.0 \\
+        Green & 0.4 & -6.2 \\
+        Reform UK & 0.5 & -14.8 \\
+        Alliance Party & 0.4 & -0.2 \\
+        Social Democratic \& Labour Party & 0.3 & -0.1 \\
+        Ulster Unionist Party & 0.3 & -0.2 \\
+        \hline
+    \end{tabular}
+    \caption{Average Seat Share and Partisan Bias by Party in Simulations}
+    \label{tab:seat_share_partisan_bias_area_2024}
+\end{table}
+
+Compared to the actual election results, where the Labour party had a partisan bias of +29.6 while most other parties had values of close to zero or negative, the simulated
+partisan bias values are more evenly distributed. The notable exception is Reform UK (RUK), whose partisan bias has decreased from -13.5 to -14.8.
+
+Conclusions cannot be drawn from mean values alone, as these do not fully capture the impact of area-based partitioning and varying the number of constituencies. 
+To gain deeper insight, the variance in these values across simulations must be examined.
+
+Figure \ref{fig:seat_share_area_2024} shows the seat share of each party in each simulation.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{seat_share_area_2024.png}
+    \caption{Seat share won each party for area-based partitioning (2024)}
+    \label{fig:seat_share_area_2024}
+\end{figure}
+
+While there is evidently a lot of fluctuation across parties, this is most visible with the Labour party. The seat share of the Labour party falls within 
+two distinct "bands" of roughly around 35\% and 45\%, with relatively few points falling outside of this pattern. This seems to be somewhat mirrored by the
+fluctuation of the Conservative seat share. Plotting Conservative seat share against Labour seat share reveals a visible inverse correlation
+between the two, as seen in figure \ref{fig:seat_share_area_con_lab_2024}. This makes intuitive sense, as they are the largest political parties who win the most seats, and one side winning more seats reduces the 
+number of seats remaining to be won by the other.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{seat_share_area_con_lab_2024.png}
+    \caption{Seat share won by the Conservative and Labour parties for area-based partitioning (2024)}
+    \label{fig:seat_share_area_con_lab_2024}
+\end{figure}
+
+The two buckets in which the Labour seat share seems to fall are visible in this graph as two distinct clusters. Interestingly, the Conservative seat share
+follows no such pattern. The reason for this is likely in the geographical distribution of Labour and Conservative voters. As seen in figure \ref{fig:mainland_area_850_results_map},
+Labour voters tend to be more concentrated in urban areas, meaning minute changes to constituency boundaries can cause large swings in their party's electoral success. Conversely, the more even distribution
+of Conservative voters among less densely populated areas means that the Conservative party sees a more consistent conversion of votes to seats regardless of
+how constituencies are drawn.
+
+This also explains Labour's drop in seat share and partisan bias from the actual elections to these simulations. Area--based clustering naturally disadvantages parties with geographically concentrated
+voters by increasing the number of constituencies located outside of urban centres in which many of these parties' voters are located.
+
+The extent to which each party is favoured can be quantified by partisan bias. Figure \ref{fig:partisan_bias_area_ukwide_2024} shows the partisan bias with respect to the five most successful
+non--country--based parties.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{partisan_bias_area_ukwide_2024.png}
+    \caption{Partisan bias for the most significant parties for Area-based partitioning (2024)}
+    \label{fig:partisan_bias_area_ukwide_2024}
+\end{figure}
+
+While the Labour and Conservative parties have average partisan biases in the simulations of +6.6 and +5.6 respectively, each of these values varies greatly between simulations. 
+Despite this, there appears to be no correlation whatsoever between the partisan bias of any party and the number of constituencies. This suggests that it is not the number of constituencies,
+but other characteristics of a constituency set that dictate what party is favoured.
+
+
+Reform UK (RUK)'s drop from a partisan bias of -13.5 in the actual election to a consistent range of -14.5 to -15 in the simulations indicates that their already low partisan bias, likely caused by an overly even distribution
+of voters across the UK, is exacerbated by area-based districting. While other parties tend to have somewhat geographically concentrated voters, such as Labour in urban areas or the Liberal Democratic party (LD)
+in northern Scotland and the South West Peninsula, RUK voters are more evenly spread out, making converting votes to constituency wins a challenge. Figure \ref{fig:ld_ruk_distribution_2024} shows a comparison between the distribution of voters for 
+LD and RUK, clearly highlighting the difference in voter concentration.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{reform_voter_distribution_2024.png}
+        \caption{RUK voter distribution}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ld_voter_distribution_2024.png}
+        \caption{LD voter distribution}
+    \end{subfigure}
+    \caption{Distribution of RUK and LD voters in the 2024 general election \cite{voter_distribution_2024}}
+    \label{fig:ld_ruk_distribution_2024}
+\end{figure}
+
+
+Reform UK (RUK) and the Green Party exhibit minimal variance in partisan bias across simulations, consistently around -15 and -6, respectively. 
+Notably, the Green Party's simulated partisan bias of -6 closely aligns with its actual election value of -6.1. Meanwhile, RUK's real-world partisan bias of -13.5 decreases
+in the simulations. The Liberal Democratic party (LD) hover at around 0--1, with moderate variance., while the Labour and Conservative parties have partisan biases of anywhere between 0 and 20 with 
+a large degree of fluctuation. LD has an actual partisan bias of -1.1, which increases slightly in the simulations. Labour and 
+
+These low partisan biases can be explained by voter distribution. The Labour and Conservative parties are dominant and have strong constituencies in urban and rural areas
+respectively, so will logically always have favourable 
+
+The Reform UK Party (RUK) have a consistent partisan bias of about -15, far lower than any of the other UK wide parties. This follows the same pattern as the actual results in table 
+\ref{tab:uk2024},
+
+% Plot partisan bias for ukwide and regional parties and talk about differences, and talk about RUK being super low
+% Then plot gallagher and laakso-taagepera indices and analyse
+% Then do results for population based partitioning, drawing parallels with the area based
+% Analyis for 2017 and 2019 shouldn't be AS in depth, more supplementary to the 2024 stuff
+
 
 \section{Conclusion}
 
